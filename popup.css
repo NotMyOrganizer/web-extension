@@ -14,20 +14,44 @@ h1 { font-size: 16px; margin: 4px 0 12px; }
 
 .controls {
   display: flex;
+  align-items: center;
   gap: 8px;
   flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
-button {
-  padding: 8px 10px;
-  border: 1px solid #bbb;
-  border-radius: 6px;
-  background: white;
+/* Slider CSS (modified from old button style) */
+#toggle-slider {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  -webkit-appearance: none;
+  background: #ccc;
+  border-radius: 10px;
   cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
 }
 
-button:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+#toggle-slider:checked {
+  background-color: #2196F3;
+}
+
+#toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  background-color: white;
+  transition: transform 0.3s;
+}
+
+#toggle-slider:checked::before {
+  transform: translateX(20px);
+}
 
 .output {
   background: white;

@@ -10,13 +10,13 @@
     <h1>Browser Inspector</h1>
 
     <div class="controls">
-      <button id="btnHistory">Get Recent History</button>
-      <button id="btnMeta">Get Current Page Metadata</button>
-      <button id="btnRobots">Fetch robots.txt for Current Page</button>
-      <button id="btnLocation">Get My Location</button>
+      <label for="toggle-slider">Enable Auto-Scanning:</label>
+      <input type="checkbox" id="toggle-slider">
     </div>
 
-    <div id="output" class="output"></div>
+    <div id="output" class="output">
+      <p>Toggle the slider to start auto-scanning. Data will be sent to the API after you spend at least 10 seconds on a new page.</p>
+    </div>
   </div>
 
   <script src="popup.js"></script>
