@@ -1,0 +1,41 @@
+/* popup.css */
+body {
+  font-family: Arial, sans-serif;
+  min-width: 420px;
+  max-width: 800px;
+  margin: 0;
+  padding: 10px;
+  background: #f9f9f9;
+  color: #222;
+}
+
+.container { padding: 6px; }
+h1 { font-size: 16px; margin: 4px 0 12px; }
+
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 8px 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+}
+
+button:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+
+.output {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  max-height: 420px;
+  overflow: auto;
+  font-size: 13px;
+  white-space: pre-wrap;
+}

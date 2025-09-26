@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Browser Inspector",
+  "description": "Get history, robots.txt, geolocation and URL metadata.",
+  "version": "1.0.0",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "192": "icons/icon192.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Browser Inspector"
+  },
+  "permissions": [
+    "history",
+    "tabs",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
