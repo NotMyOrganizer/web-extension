@@ -1,24 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
   <title>Browser Inspector</title>
   <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Browser Inspector</h1>
-
-    <div class="controls">
-      <label for="toggle-slider">Enable Auto-Scanning:</label>
-      <input type="checkbox" id="toggle-slider">
-    </div>
-
-    <div id="output" class="output">
-      <p>Toggle the slider to start auto-scanning. Data will be sent to the API after you spend at least 10 seconds on a new page.</p>
-    </div>
-  </div>
-
+  <label>
+    <input type="checkbox" id="toggle-slider">
+    Enable Auto-Scan
+  </label>
+  <pre id="output"></pre>
   <script src="popup.js"></script>
 </body>
 </html>

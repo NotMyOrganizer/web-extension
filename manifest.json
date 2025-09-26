@@ -16,19 +16,13 @@
     "history",
     "tabs",
     "scripting",
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "host_permissions": [
     "<all_urls>"
   ],
   "background": {
     "service_worker": "service_worker.js"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content_script.js"],
-      "run_at": "document_idle"
-    }
-  ]
+  }
 }
