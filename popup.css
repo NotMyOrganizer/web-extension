@@ -1,4 +1,3 @@
-/* popup.css — ProtonVPN Dark Style */
 body {
   font-family: 'Inter', Arial, sans-serif;
   min-width: 420px;
@@ -6,8 +5,8 @@ body {
   max-height: 160px;
   margin: 0;
   padding: 2rem;
-  background: #0f1117; /* Deep dark background */
-  color: #e5e7eb; /* Soft light text */
+  background: #0f1117;
+  color: #e5e7eb;
   line-height: 1.5;
   display: flex;
   flex-direction: column;
@@ -25,10 +24,9 @@ body {
   gap: 4rem;
   cursor: pointer;
   font-size: 1rem;
-  user-select: none; /* Prevents text selection on click */
+  user-select: none;
 }
 
-/* Hide the default checkbox */
 #power-button {
   -webkit-appearance: none;
   appearance: none;
@@ -37,24 +35,22 @@ body {
   cursor: pointer;
 }
 
-/* The circular part of the button */
 #power-button::before {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1); /* default scale */
-  width: 48px; /* Medium size */
+  transform: translate(-50%, -50%) scale(1);
+  width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 5px solid #3d4251; /* Dark grey border for OFF state */
+  border: 5px solid #3d4251;
   transition: 
     border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* smooth scaling */
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* The vertical line inside the button */
 #power-button::after {
   content: '';
   position: absolute;
@@ -63,7 +59,7 @@ body {
   transform: translate(-50%, -85%);
   width: 5px;
   height: 14px;
-  background: #3d4251; /* Dark grey for OFF state */
+  background: #3d4251;
   border-radius: 2px;
   transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -73,14 +69,13 @@ body {
   border-color: #00ff94;
   box-shadow: 0 0 8px rgba(0, 255, 148, 0.7),
               0 0 16px rgba(0, 255, 148, 0.5);
-  transform: translate(-50%, -50%) scale(1.2); /* slightly bigger */
+  transform: translate(-50%, -50%) scale(1.2);
 }
 
 #power-button:checked::after {
   background: #00ff94;
 }
 
-/* Output box */
 #output {
   width: 100%;
   box-sizing: border-box;
