@@ -1,5 +1,3 @@
-// content_script.js
-
 function extractMetadata() {
   const metadata = {};
 
