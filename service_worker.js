@@ -1,28 +1,7 @@
-// service_worker.js
-
-// --- (Constants and other utility functions remain the same) ---
-const API_URL = "https://api.example.com/extension-data"; // Replace with your real API endpoint
+const API_URL = "https://api.example.com/extension-data";
 const OFFSCREEN_DOCUMENT_PATH = '/offscreen.html';
 let isAutoScanEnabled = false;
 let lastUrl = null;
-
-// --- (getHistoryItems, sendMessageToTab, hasOffscreenDocument, getGeolocation, extractMetadata functions remain the same) ---
-
-/* NOTE: The helper functions like getHistoryItems, getGeolocation, etc. are omitted here for brevity but should remain in your file. */
-function getHistoryItems(maxResults = 100) {
-  return new Promise((resolve) => {
-    chrome.history.search({ text: "", maxResults }, (results) => {
-      const items = (results || []).map((r) => ({
-        id: r.id,
-        url: r.url,
-        title: r.title,
-        timestamp: r.lastVisitTime,
-        visitCount: r.visitCount,
-      }));
-      resolve(items);
-    });
-  });
-}
 
 async function extractMetadata(tabId) {
   try {
@@ -66,8 +45,6 @@ async function collectAndSendAllData(tabId, url) {
   console.log("Collecting data for:", url);
 
   try {
-    // --- UPDATE: Re-enabled history collection ---
-    const historyData = await getHistoryItems(10);
     const metadata = await extractMetadata(tabId);
 
     let geolocationData = null;
@@ -77,12 +54,10 @@ async function collectAndSendAllData(tabId, url) {
       console.warn("Could not get geolocation. User may have denied permission or an error occurred.", e.message);
     }
 
-    // --- UPDATE: Cleaned up the payload ---
     const payload = {
       timestamp: Date.now(),
       url: url,
-      history: historyData,
-      metadata: metadata,
+      metadata: metadata.meta.description || null,
       geolocation: geolocationData,
     };
 
@@ -104,16 +79,14 @@ async function collectAndSendAllData(tabId, url) {
   }
 }
 
-// --- (Event Listeners and Initialization remain the same) ---
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "TOGGLE_AUTOSCAN") {
     isAutoScanEnabled = message.isEnabled;
-    // Persist the setting so it's remembered
     chrome.storage.local.set({ isAutoScanEnabled: isAutoScanEnabled }, () => {
       console.log(`Auto-scanning is now ${isAutoScanEnabled ? "enabled" : "disabled"}`);
       sendResponse({ ok: true });
     });
-    return true; // Indicates an asynchronous response
+    return true;
   }
 });
 

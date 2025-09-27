@@ -52,12 +52,9 @@ function extractMetadata() {
   return metadata;
 }
 
-// --- UPDATE: Cleaned up listener ---
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === "GET_METADATA") {
     sendResponse({ ok: true, data: extractMetadata() });
   }
-  // Return true to indicate you might send a response asynchronously.
-  // This is a good practice even if the current operation is synchronous.
   return true;
 });
