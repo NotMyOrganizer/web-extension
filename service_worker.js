@@ -97,7 +97,7 @@ async function collectAndSendAllData(tabId, url) {
   console.log("Collecting data for:", url);
 
   try {
-    const historyData = await getHistoryItems(10);
+    // const historyData = await getHistoryItems(10);
 
     let metadata = await extractMetadata(tabId);
 
@@ -111,15 +111,21 @@ async function collectAndSendAllData(tabId, url) {
     const payload = {
       timestamp: Date.now(),
       url: url,
-      data: {
-        history: historyData,
-        metadata: metadata,
-        geolocation: geolocationData,
-      },
+      metadata : metadata,
+      getGeolocation : geolocationData
     };
 
-    
     console.log("Sending payload to API:", payload);
+
+    const payload2 = {
+      timestamp: Date.now(),
+      url: url,
+      metadata : metadata.meta.description || null,
+      getGeolocation : geolocationData
+    }
+
+    console.log("The payload 2 is :" , payload2);
+    
     const resp = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
