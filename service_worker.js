@@ -120,7 +120,6 @@ async function collectAndSendAllData(tabId, url) {
 
     
     console.log("Sending payload to API:", payload);
-    console.log(JSON.stringify(payload));
     const resp = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -159,14 +158,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     collectAndSendAllData(tabId, tab.url);
   }
 });
-
-// Listen for client-side navigations in Single-Page Applications
-// chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
-//   if (isAutoScanEnabled && details.frameId === 0 && details.url?.startsWith("http")) {
-//     console.log("webNavigation.onHistoryStateUpdated event fired for:", details.url);
-//     collectAndSendAllData(details.tabId, details.url);
-//   }
-// });
 
 // --- Initialization ---
 
