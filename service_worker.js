@@ -35,16 +35,27 @@ async function extractMetadata(tabId) {
 }
 
 async function hasOffscreenDocument() {
-    /* ... your existing code ... */
+  const matchedClients = await clients.matchAll();
+  return matchedClients.some(c => c.url.endsWith(OFFSCREEN_DOCUMENT_PATH));
 }
+
 async function getGeolocation() {
-    /* ... your existing code ... */
+  if (!(await hasOffscreenDocument())) {
+    await chrome.offscreen.createDocument({
+      url: 'offscreen.html',
+      reasons: ['GEOLOCATION'],
+      justification: 'To fetch user location for the data payload.',
+    });
+  }
+  const response = await chrome.runtime.sendMessage({ type: 'GET_GEOLOCATION' });
+  await chrome.offscreen.closeDocument();
+  if (response && response.ok) {
+    return response;
+  } else {
+    throw new Error(response?.error || 'Unknown geolocation error');
+  }
 }
 
-
-/**
- * Collects all data points and sends them to the API.
- */
 async function collectAndSendAllData(tabId, url) {
   if (url === lastUrl) {
     console.log("URL is the same as the last scanned one. Skipping.");
