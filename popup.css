@@ -1,87 +1,95 @@
 /* popup.css — ProtonVPN Dark Style */
 body {
   font-family: 'Inter', Arial, sans-serif;
-  min-width: 420px;
-  max-width: 800px;
+  min-width: 140px;
+  max-width: 260px;
+  min-height: 150px;
+  max-height: 160px;
   margin: 0;
-  padding: 16px;
+  padding: 2rem;
   background: #0f1117; /* Deep dark background */
   color: #e5e7eb; /* Soft light text */
   line-height: 1.5;
-}
-
-.container {
-  background: #181a21; /* Slightly lighter dark card */
-  padding: 16px;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-h1 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 16px;
-  color: #f9fafb; /* Bright white for headings */
-}
-
-.controls {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
+  gap: 40px;
+  border-radius: 10rem;
 }
 
-/* Toggle switch — 3D ProtonVPN style */
-#toggle-slider {
-  position: relative;
-  width: 50px;
-  height: 26px;
+.power-button-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 4rem;
+  cursor: pointer;
+  font-size: 1rem;
+  user-select: none; /* Prevents text selection on click */
+}
+
+/* Hide the default checkbox */
+#power-button {
   -webkit-appearance: none;
   appearance: none;
-  background: linear-gradient(145deg, #1e212a, #0c0e13);
-  border-radius: 14px;
-  cursor: pointer;
+  position: relative;
   outline: none;
-  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.7),
-              inset -2px -2px 5px rgba(255,255,255,0.05);
-  transition: background 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
-#toggle-slider:checked {
-  background: linear-gradient(145deg, #00ff94, #00cc77);
-  box-shadow: 0 0 10px rgba(0,255,150,0.6),
-              inset 2px 2px 5px rgba(0,0,0,0.5),
-              inset -2px -2px 5px rgba(255,255,255,0.05);
-}
-
-#toggle-slider::before {
+/* The circular part of the button */
+#power-button::before {
   content: '';
   position: absolute;
-  width: 22px;
-  height: 22px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1); /* default scale */
+  width: 48px; /* Medium size */
+  height: 48px;
   border-radius: 50%;
-  top: 2px;
-  left: 2px;
-  background: linear-gradient(145deg, #2a2f3a, #0e1116);
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.8),
-              -2px -2px 6px rgba(255,255,255,0.05);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              background 0.3s;
+  border: 5px solid #3d4251; /* Dark grey border for OFF state */
+  transition: 
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* smooth scaling */
 }
 
-#toggle-slider:checked::before {
-  transform: translateX(24px);
-  background: radial-gradient(circle at 30% 30%, #fff, #d9fef0);
+/* The vertical line inside the button */
+#power-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -85%);
+  width: 5px;
+  height: 14px;
+  background: #3d4251; /* Dark grey for OFF state */
+  border-radius: 2px;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- ON STATE --- */
+#power-button:checked::before {
+  border-color: #00ff94;
+  box-shadow: 0 0 8px rgba(0, 255, 148, 0.7),
+              0 0 16px rgba(0, 255, 148, 0.5);
+  transform: translate(-50%, -50%) scale(1.2); /* slightly bigger */
+}
+
+#power-button:checked::after {
+  background: #00ff94;
 }
 
 /* Output box */
-.output {
+#output {
+  width: 100%;
+  box-sizing: border-box;
   background: #1a1d26;
   border: 1px solid #2a2d36;
   padding: 14px;
   border-radius: 12px;
-  max-height: 420px;
+  min-height: 200px;
   overflow: auto;
   font-size: 13px;
   font-family: 'JetBrains Mono', monospace;

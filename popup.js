@@ -1,6 +1,6 @@
 // popup.js
 
-const toggleSlider = document.getElementById("toggle-slider");
+const toggleSlider = document.getElementById("power-button");
 const outputEl = document.getElementById("output");
 
 function show(obj) {
