@@ -1,7 +1,5 @@
 // content_script.js
 
-// Extract metadata from the DOM and URL
-// content_script.js
 function extractMetadata() {
   const metadata = {};
 
@@ -54,23 +52,12 @@ function extractMetadata() {
   return metadata;
 }
 
-// Listen for requests from background
+// --- UPDATE: Cleaned up listener ---
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === "GET_METADATA") {
     sendResponse({ ok: true, data: extractMetadata() });
   }
+  // Return true to indicate you might send a response asynchronously.
+  // This is a good practice even if the current operation is synchronous.
+  return true;
 });
-
-
-// Respond to messages
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === "GET_METADATA") {
-    sendResponse({ ok: true, data: extractMetadata() });
-  }
-});
-
-// Optionally: automatically push metadata to background on navigation (comment out if noisy)
-// window.addEventListener('load', () => {
-//   const meta = extractMetadata();
-//   chrome.runtime.sendMessage({ type: 'PAGE_METADATA', metadata: meta });
-// });

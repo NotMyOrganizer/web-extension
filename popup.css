@@ -1,8 +1,7 @@
 /* popup.css — ProtonVPN Dark Style */
 body {
   font-family: 'Inter', Arial, sans-serif;
-  min-width: 140px;
-  max-width: 260px;
+  min-width: 420px;
   min-height: 150px;
   max-height: 160px;
   margin: 0;
